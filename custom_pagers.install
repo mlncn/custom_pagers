@@ -1,0 +1,135 @@
+<?php
+// $Id: custom_pagers.install,v 1.3.2.4 2010/01/17 22:14:21 eaton Exp $
+
+/**
+ * @file
+ * Custom pagers install file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function custom_pagers_install() {
+  drupal_install_schema('custom_pagers');
+}
+
+function custom_pagers_schema() {
+  $schema['custom_pager'] = array(
+    'description' => 'Stores data for previous/next pagers to be added to nodes.',
+    'fields' => array(
+      'pid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Unique identifier for the {custom_pager}.',
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The visible title of the {custom_pager}.',
+      ),
+      'list_php' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => 'Raw PHP to populate this {custom_pager}.',
+      ),
+      'view' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The name of the view used for this {custom_pager}.',
+      ),
+      'args' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => "A serialized array of arguments for the {custom_pager}'s view.",
+      ),
+      'position' => array(
+        'type' => 'varchar',
+        'length' => 16,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The position where this {custom_pager} should be displayed.',
+      ),
+      'visibility_php' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+        'description' => 'Raw PHP to determine when the {custom_pager} should be displayed.',
+      ),
+      'node_type' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'A specific node type this {custom_pager} should be displayed with.',
+      ),
+      'reverse_list' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+        'description' => 'A boolean flag indicating that this {custom_pager} should be displayed in reverse order.',
+      ),
+    ),
+    'primary key' => array('pid'),
+  );
+  return $schema;
+}
+
+
+function custom_pagers_update_1() {
+  $ret = array();
+  db_add_field($ret, 'custom_pager', 'list_php', array(
+    'type' => 'text',
+    'not null' => FALSE,
+    'size' => 'big',
+    'description' => 'Raw PHP to populate this {custom_pager}.',
+  ));
+  db_add_field($ret, 'custom_pager', 'visibility_php', array(
+    'type' => 'text',
+    'not null' => FALSE,
+    'size' => 'big',
+    'description' => 'Raw PHP to determine when the {custom_pager} should be displayed.',
+  ));
+  return $ret;
+}
+
+function custom_pagers_update_2() {
+  $ret = array();
+  db_add_field($ret, 'custom_pager', 'cache_list', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'size' => 'tiny',
+    'description' => "A boolean flag indicating that this {custom_pager}'s list of nodes should be cached.",
+  ));
+  db_add_field($ret, 'custom_pager', 'reverse_list', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'size' => 'tiny',
+    'description' => 'A boolean flag indicating that this {custom_pager} should be displayed in reverse order.',
+  ));
+  return $ret;
+}
+
+
+/**
+ * Kill the cache flag as it's not actually that helpful.
+ */
+function custom_pagers_update_6104() {
+  $ret = array();
+  db_drop_field($ret, 'custom_pager', 'cache_list');
+  return $ret;
+}
+
+function custom_pagers_uninstall() {
+  drupal_uninstall_schema('custom_pagers');
+}

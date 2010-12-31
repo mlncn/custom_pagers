@@ -1,0 +1,366 @@
+# Hungarian translation of custom_pagers (6.x-1.10-beta1)
+# Copyright (c) 2009 by the Hungarian translation team
+# Generated from files:
+#  custom_pagers.admin.inc,v 1.1 2008/06/17 20:47:05 eaton
+#  custom_pagers.module,v 1.6 2008/06/17 21:20:32 eaton
+#  custom_pagers.install,v 1.3 2008/06/17 20:47:05 eaton
+#  custom_pagers.info,v 1.5 2008/06/17 20:47:05 eaton
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: custom_pagers (6.x-1.10-beta1)\n"
+"POT-Creation-Date: 2009-09-18 12:51+0200\n"
+"PO-Revision-Date: 2009-09-18 12:51+0200\n"
+"Language-Team: Hungarian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: custom_pagers.admin.inc:16
+msgid "edit"
+msgstr "szerkesztés"
+
+#: custom_pagers.admin.inc:200,208
+msgid "Delete"
+msgstr "Törlés"
+
+#: custom_pagers.module:310
+msgid "‹ previous"
+msgstr "‹ előző"
+
+#: custom_pagers.module:312
+msgid "next ›"
+msgstr "következő ›"
+
+#: custom_pagers.admin.inc:8,41
+msgid "Title"
+msgstr "Cím"
+
+#: custom_pagers.admin.inc:8
+msgid "Visibility"
+msgstr "Láthatóság"
+
+#: custom_pagers.admin.inc:195
+msgid "Submit"
+msgstr "Beküldés"
+
+#: custom_pagers.admin.inc:162
+msgid "Placeholder tokens"
+msgstr "Helykitöltő vezérjelek"
+
+#: custom_pagers.admin.inc:152
+msgid "View arguments"
+msgstr "A nézet paraméterei"
+
+#: custom_pagers.admin.inc:116
+msgid "Warning"
+msgstr "Figyelmeztetés"
+
+#: custom_pagers.admin.inc:49
+msgid "Pager position"
+msgstr "Lapozó elhelyezkedése"
+
+#: custom_pagers.admin.inc:8
+msgid "Node list"
+msgstr "Tartalomlista"
+
+#: custom_pagers.admin.inc:14,15
+msgid "PHP snippet"
+msgstr "PHP kód"
+
+#: custom_pagers.admin.inc:14
+msgid " view"
+msgstr " nézet"
+
+#: custom_pagers.admin.inc:15
+msgid " nodes"
+msgstr " tartalmak"
+
+#: custom_pagers.admin.inc:20
+msgid "No custom pagers have been defined."
+msgstr "Nincs felvett egyedi lapozó."
+
+#: custom_pagers.admin.inc:23
+msgid "Add a new custom pager"
+msgstr "Egyedi lapozó hozzáadása"
+
+#: custom_pagers.admin.inc:52
+msgid "Above the node's body"
+msgstr "A tartalom törzse felett"
+
+#: custom_pagers.admin.inc:53
+msgid "Below the node's body"
+msgstr "A tartalom törzse alatt"
+
+#: custom_pagers.admin.inc:54
+msgid "Both above and below the node's body"
+msgstr "A tartalom törzse alatt és felett is"
+
+#: custom_pagers.admin.inc:55
+msgid "In a sidebar block"
+msgstr "Egy oldalsáv blokkban"
+
+#: custom_pagers.admin.inc:57
+msgid "The node type(s) this custom pager will apply to."
+msgstr "Azok a tartalomtípusok, melyekhez ez a lapozó tartozik."
+
+#: custom_pagers.admin.inc:65
+msgid "Pager visibility"
+msgstr "A lapozó láthatósága"
+
+#: custom_pagers.admin.inc:66
+msgid "Determine what nodes this pager should be displayed on."
+msgstr ""
+"Meghatározza azon tartalomtípusokat, amelyeknél a lapozó "
+"megjelenik."
+
+#: custom_pagers.admin.inc:73,109
+msgid "Note"
+msgstr "Megjegyzés"
+
+#: custom_pagers.admin.inc:74
+msgid ""
+"This pager uses custom PHP snippets to control visibility. You do not "
+"have permission to use PHP snippets, and the changes you make to this "
+"field will be ignored."
+msgstr ""
+"Ez a lapozó egyedi PHP kód alapján határozza meg láthatóságát. "
+"Ha nincs megfelelő jogosultság a PHP kódok használatához, akkor "
+"ezen mező változások nem lesznek figyelembe véve."
+
+#: custom_pagers.admin.inc:79
+msgid "By node type"
+msgstr "Tartalomtípus szerint"
+
+#: custom_pagers.admin.inc:83
+msgid "If the PHP field is filled in, this field will be ignored."
+msgstr ""
+"A mező értéke nem lesz figyelembe véve, ha a <em>PHP kód "
+"által</em>mező ki van töltve."
+
+#: custom_pagers.admin.inc:89
+msgid "By PHP snippet"
+msgstr "PHP kód által"
+
+#: custom_pagers.admin.inc:91
+msgid ""
+"Use a snippet of PHP to return TRUE or FALSE. Note that this code has "
+"access to the $node variable, and can check its type or any other "
+"property. If this field is filled out, the <em>By node type</em> field "
+"will be ignored."
+msgstr ""
+"A PHP kódnak TRUE vagy FALSE értékkel kell visszatérnie. Ez a kód "
+"eléri a $node változót, lekérdezhető a típusa, vagy bármely "
+"más tulajdonsága. Ha ez a mező ki van töltve, akkor a "
+"<em>Tartalomtípus szerint</em> mező értéke figyelmen kívül "
+"marad."
+
+#: custom_pagers.admin.inc:99
+msgid "Pager node list"
+msgstr "A lapozó tartalomlistája"
+
+#: custom_pagers.admin.inc:100
+msgid "Determine how the list of nodes for this pager should be generated."
+msgstr "A tartalomlista meghatározása a lapozó elkészítéséhez."
+
+#: custom_pagers.admin.inc:110
+msgid ""
+"This pager uses custom PHP snippets to generate a list of nodes. You "
+"do not have permission to use PHP snippets, and the changes you make "
+"to this field will be ignored."
+msgstr ""
+"Ez a lapozó egyedi PHP kód alapján határozza meg tartalomlistát. "
+"Ha nincs megfelelő jogosultság a PHP kódok használatához, akkor a "
+"mező változások nem lesznek figyelembe véve."
+
+#: custom_pagers.admin.inc:117
+msgid ""
+"The Views module is not installed, and you do not have permission to "
+"use PHP snippets to configure the node. You can save this custom "
+"pager, but it will not appear until the node list is properly "
+"configured."
+msgstr ""
+"A <em>Views</em> modul nincs engedélyezve és nincs jogosultság PHP "
+"kódot használni a tartalom beállításához. Az egyedi lapozó "
+"elmenthető, de a megfelelő tartalomlista beállításáig nem fog "
+"megjelenni."
+
+#: custom_pagers.admin.inc:124
+msgid "Use PHP snippet"
+msgstr "PHP kód használata"
+
+#: custom_pagers.admin.inc:127
+msgid ""
+"Use a snippet of PHP to populate the pager. The snippet should return "
+"an array of node ids in the order they should be browsed. If this "
+"field is filled out, the <em>Use a view</em> and <em>View "
+"arguments</em> fields will be ignored."
+msgstr ""
+"PHP kód használata a lapozó feltöltéséhez. A kódnak egy "
+"tartalomazonosító tömbbel kell visszatérnie, abban a sorrendben, "
+"ahogy a lapozó lépked. Ha ez a mező ki van töltve, akkor a "
+"<em>Nézet használata</em> és a <em>Nézet paraméterei</em> mezők "
+"figyelmen kívül maradnak."
+
+#: custom_pagers.admin.inc:143
+msgid "Use a view"
+msgstr "Nézet használata"
+
+#: custom_pagers.admin.inc:146
+msgid ""
+"A view used to populate the pager. The nodes will appear in the pager "
+"in the same order they are displayed in the view. If the PHP field is "
+"populated, this will be ignored."
+msgstr ""
+"Nézet a lapozó feltöltéséhez. A tartalmak abban a sorrendben "
+"jelennek meg a lapozóban, ahogy a nézetben is vannak. Ha a <em>PHP "
+"kód használata</em> mező ki van töltve, akkor ez a mező figyelmen "
+"kívül marad."
+
+#: custom_pagers.admin.inc:154
+msgid ""
+"A return-delimited list of arguments to pass into the selected view. "
+"If Token.module is enabled, placeholder tokens like [type] and "
+"[author] can be used."
+msgstr ""
+"Paraméterek a kiválasztott nézetnek, minden paraméter külön "
+"sorban. Ha a <em>Token</em> modul engedélyezett, akkor a "
+"helykitöltő vezérjelek is használhatók, pl. [type] és [author]."
+
+#: custom_pagers.admin.inc:163
+msgid ""
+"The following placeholder tokens can be used when passing arguments "
+"into the view. Each will be replaced with the correct values at "
+"runtime."
+msgstr ""
+"A következő helykitöltő vezérjelek használhatók a nézetek "
+"paraméter átadásakor. Mindegyik a megfelelő értéket veszi fel "
+"futás közben."
+
+#: custom_pagers.admin.inc:172
+msgid ""
+"To use dynamic placeholder tokens in your pager arguments (the ID of "
+"the current node or currently logged in user, for example), download "
+"and install the <a href='@token'>Token module</a> from Drupal.org."
+msgstr ""
+"Dinamikus helykitöltő vezérjelek lapozó paraméterként történő "
+"használatához (pl. az aktuális tartalom azonosítója, "
+"bejelentkezett felhasználó), a <a href='@token'>Token</a> modult "
+"kell telepíteni a Drupal.org oldalról."
+
+#: custom_pagers.admin.inc:180
+msgid "Reverse the list of nodes"
+msgstr "A tartalomlista sorrendjének megfordítása"
+
+#: custom_pagers.admin.inc:182
+msgid ""
+"The natural list view ordering for an archive is the opposite of the "
+"natural 'previous/next' order for a pager. As such, reversing the "
+"pager list is useful when using a single view for paging and other "
+"sorted lists (pages, blocks, etc)."
+msgstr ""
+"A természetes archívum lista nézet sorrendje pont az ellenkezője a "
+"természetes „előző/következő” lapozó sorrendnek. Ezért, a "
+"lapozó sorrend megfordítása hasznos, ha egy nézet áll "
+"rendelkezésre a lapozóhoz és egyéb rendezett listákhoz is "
+"(oldalak, blokkok, stb.)."
+
+#: custom_pagers.admin.inc:188
+msgid "Cache the list of nodes"
+msgstr "A tartalomlista gyorstárazása"
+
+#: custom_pagers.module:311
+msgid "@count of @count_total"
+msgstr "@count / @count_total"
+
+#: custom_pagers.module:42
+msgid "administer custom pagers"
+msgstr "egyedi lapozók adminisztrációja"
+
+#: custom_pagers.module:42
+msgid "use php in custom pagers"
+msgstr "PHP használata egyedi lapozókban"
+
+#: custom_pagers.module:12
+msgid "Custom pagers"
+msgstr "Egyedi lapozók"
+
+#: custom_pagers.module:13
+msgid "Add custom pagers for content types."
+msgstr "Tartalomtípusokhoz egyedi lapozó felvitele"
+
+#: custom_pagers.module:21
+msgid "Add custom pager"
+msgstr "Egyedi lapozó felvitele"
+
+#: custom_pagers.module:30
+msgid "Edit custom pager"
+msgstr "Egyedi lapozó szerkesztése"
+
+#: custom_pagers.install:13
+msgid "Stores data for previous/next pagers to be added to nodes."
+msgstr ""
+"A tartalomhoz hozzárendelt előző/következő stílusú lapozó "
+"adatait tárolja."
+
+#: custom_pagers.install:19
+msgid "Unique identifier for the {custom_pager}."
+msgstr "A {custom_pager} egyedi azonosítója."
+
+#: custom_pagers.install:26
+msgid "The visible title of the {custom_pager}."
+msgstr "A {custom_pager} látható címe"
+
+#: custom_pagers.install:32
+msgid "Raw PHP to populate this {custom_pager}."
+msgstr "Nyers PHP kód amely feltölti a {custom_pager} tartalmait."
+
+#: custom_pagers.install:39
+msgid "The name of the view used for this {custom_pager}."
+msgstr "A {custom_pager} által használt nézet neve."
+
+#: custom_pagers.install:46
+msgid "A serialized array of arguments for the {custom_pager}'s view."
+msgstr "Szerializált tömb a {custom_pager} nézetének argumentumaival."
+
+#: custom_pagers.install:53
+msgid "The position where this {custom_pager} should be displayed."
+msgstr "A {custom_pager} elhelyezkedése, ahol meg kell jelennie."
+
+#: custom_pagers.install:59
+msgid "Raw PHP to determine when the {custom_pager} should be displayed."
+msgstr "Nyers PHP kód amely meghatározza a {custom_pager} láthatóságát."
+
+#: custom_pagers.install:66
+msgid "A specific node type this {custom_pager} should be displayed with."
+msgstr "A tartalom típus melyhez a {custom_pager} tartozik."
+
+#: custom_pagers.install:73
+msgid ""
+"A boolean flag indicating that this {custom_pager} should be displayed "
+"in reverse order."
+msgstr ""
+"Jelző érték, mely meghatározza, hogy a {custom_pager} fordított "
+"sorrenddel működjön, vagy nem."
+
+#: custom_pagers.install:80
+msgid ""
+"A boolean flag indicating that this {custom_pager}'s list of nodes "
+"should be cached."
+msgstr ""
+"Jelző érték, mely megmutatja, hogy a {custom_pager} "
+"tartalomlistája gyorstárazva legyen, vagy nem."
+
+#: custom_pagers.info:0
+msgid "Custom Pagers"
+msgstr "Custom Pagers"
+
+#: custom_pagers.info:0
+msgid ""
+"Allows administrators to define custom pagers for navigation in lists "
+"of nodes."
+msgstr ""
+"Lehetővé teszi az adminisztrátorok számára egyedi lapozó "
+"készítését tartalomlistákban történő navigáláshoz."
+

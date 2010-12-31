@@ -61,41 +61,39 @@ function custom_pagers_theme() {
   );
 }
 
-function custom_pagers_nodeapi(&$node, $op, $teaser, $page) {
-  switch ($op) {
-    case 'view':
-      // We want to make sure we don't try to output when print.module is active.
-      // It's a bit of special casing but it doesn't do much harm.
-      if ($teaser == FALSE && empty($node->printing)) {
-        $node->custom_pagers = _custom_pagers_load_all_pagers();
-        foreach ($node->custom_pagers as $pager) {
-          if ($pager->position != 'block' && _custom_pagers_visibility($pager, $node)) {
-            $nav_array = custom_pager_build_nav($pager, $node);
-            if ($nav_array['current_index'] != -1) {
-              switch ($pager->position) {
-                case 'top':
-                  $node->content['custom_pager_top'][$pager->pid] = array('#value' => theme('custom_pager', $nav_array, $node, $pager, 'top'));
-                  break;
-                case 'bottom':
-                  $node->content['custom_pager_bottom'][$pager->pid] = array('#value' => theme('custom_pager', $nav_array, $node, $pager, 'bottom'));
-                  break;
-                case 'both':
-                  $node->content['custom_pager_top'][$pager->pid] = array('#value' => theme('custom_pager', $nav_array, $node, $pager, 'top'));
-                  $node->content['custom_pager_bottom'][$pager->pid] = array('#value' => theme('custom_pager', $nav_array, $node, $pager, 'bottom'));
-                  break;
-              }
-            }
+function custom_pagers_node_view(&$node, $view_mode, $langcode) {
+
+  // We want to make sure we don't try to output when print.module is active.
+  // It's a bit of special casing but it doesn't do much harm.
+  if (node_is_page($node) && empty($node->printing)) {
+    $node->custom_pagers = _custom_pagers_load_all_pagers();
+    foreach ($node->custom_pagers as $pager) {
+      if ($pager->position != 'block' && _custom_pagers_visibility($pager, $node)) {
+        $nav_array = custom_pager_build_nav($pager, $node);
+        if ($nav_array['current_index'] != -1) {
+          switch ($pager->position) {
+            case 'top':
+              $node->content['custom_pager_top'][$pager->pid] = array('#value' => theme('custom_pager', $nav_array, $node, $pager, 'top'));
+              break;
+            case 'bottom':
+              $node->content['custom_pager_bottom'][$pager->pid] = array('#value' => theme('custom_pager', $nav_array, $node, $pager, 'bottom'));
+              break;
+            case 'both':
+              $node->content['custom_pager_top'][$pager->pid] = array('#value' => theme('custom_pager', $nav_array, $node, $pager, 'top'));
+              $node->content['custom_pager_bottom'][$pager->pid] = array('#value' => theme('custom_pager', $nav_array, $node, $pager, 'bottom'));
+              break;
           }
         }
-        if (isset($node->content['custom_pager_top'])) {
-          $node->content['custom_pager_top']['#weight'] = -100;
-        }
-        if (isset($node->content['custom_pager_bottom'])) {
-          $node->content['custom_pager_bottom']['#weight'] = 100;
-        }
       }
-      break;
+    }
+    if (isset($node->content['custom_pager_top'])) {
+      $node->content['custom_pager_top']['#weight'] = -100;
+    }
+    if (isset($node->content['custom_pager_bottom'])) {
+      $node->content['custom_pager_bottom']['#weight'] = 100;
+    }
   }
+  
 }
 
 /**
@@ -289,11 +287,11 @@ function template_preprocess_custom_pager(&$vars) {
   $vars['key'] = t('@count of @count_total', array('@count' => ($nav['current_index'] + 1), '@count_total' => count($nav['full_list'])));
   $vars['next'] =  !empty($nav['next']) ? l(t('next') . ' ›', 'node/'. $nav['next']) : '';
 
-  $vars['template_files'][] = "custom-pager-{$vars['position']}";
-  $vars['template_files'][] = "custom-pager-$node->type";
-  $vars['template_files'][] = "custom-pager-$node->type-{$vars['position']}";
-  $vars['template_files'][] = "custom-pager-$pager->pid";
-  $vars['template_files'][] = "custom-pager-$pager->pid-{$vars['position']}";
+  $vars['theme_hook_suggestions'][] = "custom-pager-{$vars['position']}";
+  $vars['theme_hook_suggestions'][] = "custom-pager-$node->type";
+  $vars['theme_hook_suggestions'][] = "custom-pager-$node->type-{$vars['position']}";
+  $vars['theme_hook_suggestions'][] = "custom-pager-$pager->pid";
+  $vars['theme_hook_suggestions'][] = "custom-pager-$pager->pid-{$vars['position']}";
 }
 
 /**

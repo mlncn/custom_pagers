@@ -156,7 +156,7 @@ function custom_pagers_block_view($delta) {
 function _custom_pagers_load_pager($pid) {
   $sql = 'SELECT * FROM {custom_pager} WHERE pid = %d';
   $result = db_query('SELECT * FROM {custom_pager} WHERE pid = :pid', array(':pid' => $pid));
-  $pager = db_fetch_object($result);
+  $pager = $result[0];
   return $pager;
 }
 
@@ -167,7 +167,7 @@ function _custom_pagers_load_all_pagers($refresh = FALSE) {
     $result = db_query($sql);
 
     $pagers = array();
-    while ($pager = db_fetch_object($result)) {
+    foreach ($result as $pager) {
       $pagers[$pager->pid] = $pager;
     }
   }

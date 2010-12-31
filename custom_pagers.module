@@ -96,22 +96,30 @@ function custom_pagers_node_view(&$node, $view_mode, $langcode) {
   
 }
 
+
 /**
  * Implementation of hook_block().
  *
  * Generates a block with a pager for the current node.
  */
-function custom_pagers_block($op = 'list', $delta = 0) {
-  if ($op == 'list') {
-    $pagers = _custom_pagers_load_all_pagers();
-    foreach ($pagers as $pager) {
-      if ($pager->position == 'block') {
-        $blocks[$pager->pid]['info'] = $pager->title;
-      }
+function custom_pagers_block_list($delta = '') {
+  $pagers = _custom_pagers_load_all_pagers();
+  foreach ($pagers as $pager) {
+    if ($pager->position == 'block') {
+      $blocks[$pager->pid]['info'] = $pager->title;
     }
-    return $blocks;
   }
-  else if ($op == 'view' && arg(0) == 'node' && $node = menu_get_object()) {
+  return $blocks;
+}
+
+
+/**
+ * Implementation of hook_block().
+ *
+ * Generates a block with a pager for the current node.
+ */
+function custom_pagers_block_view($delta = '') {
+  if (arg(0) == 'node' && $node = menu_get_object()) {
     $pagers = _custom_pagers_load_all_pagers();
     if ($pager = $pagers[$delta]) {
       if ($pager->position == 'block' && _custom_pagers_visibility($pager, $node)) {

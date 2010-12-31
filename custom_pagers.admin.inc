@@ -7,6 +7,10 @@
  */
 
 // Lists all current custom pagers, and provides a link to the edit page.
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function custom_pagers_page() {
   $pagers = _custom_pagers_load_all_pagers(TRUE);
 
@@ -18,21 +22,31 @@ function custom_pagers_page() {
     $row[] = $pager->title;
     $row[] = !empty($pager->list_php) ? t('PHP snippet') : t('%view_name view', array('%view_name' => $pager->view));
     $row[] = !empty($pager->visibility_php) ? t('PHP snippet') : t('%node_type nodes', array('%node_type' => $pager->node_type));
-    $row[] =  l(t('edit'), 'admin/build/custom_pagers/edit/' . $pager->pid);
+    $row[] =  l(t('edit'), 'admin/structure/custom_pagers/edit/' . $pager->pid);
     $rows[] = $row;
   }
   if (count($rows) == 0) {
-    $rows[] = array(array('data' => t('No custom pagers have been defined.'), 'colspan' => 3));
+    $rows[] = array(array(
+        'data' => t('No custom pagers have been defined.'),
+        'colspan' => 3,
+      ));
   }
 
-  $rows[] = array(array('data' => l(t('Add a new custom pager'), 'admin/build/custom_pagers/add'), 'colspan' => 2));
+  $rows[] = array(array(
+      'data' => l(t('Add a new custom pager'), 'admin/structure/custom_pagers/add'),
+      'colspan' => 2,
+    ));
 
-  return theme('table', $header, $rows);
+  return theme('table', array('header' => $header, 'rows' => $rows));
 }
 
 
 // Displays an edit form for a custom pager record.
-function custom_pagers_form(&$form_state, $pid = NULL) {
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function custom_pagers_form($form, &$form_state, $pid = NULL) {
   if (isset($pid) && $pager = _custom_pagers_load_pager($pid)) {
     $form['pid'] = array(
       '#type' => 'hidden',
@@ -53,11 +67,11 @@ function custom_pagers_form(&$form_state, $pid = NULL) {
     '#title' => t('Pager position'),
     '#required' => TRUE,
     '#options' => array(
-                    'top' => t("Above the node's body"),
-                    'bottom' => t("Below the node's body"),
-                    'both' => t("Both above and below the node's body"),
-                    'block' => t("In a sidebar block"),
-                  ),
+      'top' => t("Above the node's body"),
+      'bottom' => t("Below the node's body"),
+      'both' => t("Both above and below the node's body"),
+      'block' => t("In a sidebar block"),
+    ),
     '#description' => t('The node type(s) this custom pager will apply to.'),
     '#default_value' => $pid ? $pager->position : NULL,
   );
@@ -83,7 +97,7 @@ function custom_pagers_form(&$form_state, $pid = NULL) {
     '#title' => t('By node type'),
     '#required' => TRUE,
     '#multiple' => TRUE,
-    '#options' => node_get_types('names'),
+    '#options' => node_type_get_names(),
     '#description' => t('If the PHP field is filled in, this field will be ignored.'),
     '#default_value' => $pid ? explode(',', $pager->node_type) : NULL,
   );
@@ -148,7 +162,7 @@ function custom_pagers_form(&$form_state, $pid = NULL) {
       '#required' => TRUE,
       '#options' => $options,
       '#description' => t('A view used to populate the pager. The nodes will appear in the pager in the same order they are displayed in the view. If the PHP field is populated, this will be ignored.'),
-      '#default_value' => $pid ? $pager->view : NULL
+      '#default_value' => $pid ? $pager->view : NULL,
     );
 
     $form['node_list']['args'] = array(
@@ -156,7 +170,7 @@ function custom_pagers_form(&$form_state, $pid = NULL) {
       '#title' => t('View arguments'),
       '#required' => FALSE,
       '#description' => t('A return-delimited list of arguments to pass into the selected view. If Token.module is enabled, placeholder tokens like [type] and [author] can be used.'),
-      '#default_value' => $pid ? $pager->args : NULL
+      '#default_value' => $pid ? $pager->args : NULL,
     );
 
     $form['help'] = array(
@@ -168,6 +182,7 @@ function custom_pagers_form(&$form_state, $pid = NULL) {
     );
 
     if (module_exists('token')) {
+      // TODO Please change this theme call to use an associative array for the $variables parameter.
       $form['help']['tokens'] = array(
         '#value' => theme('token_help', 'node'),
       );
@@ -184,7 +199,7 @@ function custom_pagers_form(&$form_state, $pid = NULL) {
     '#title' => t('Reverse the list of nodes'),
     '#return_value' => 1,
     '#description' => t("The natural list view ordering for an archive is the opposite of the natural 'previous/next' order for a pager. As such, reversing the pager list is useful when using a single view for paging and other sorted lists (pages, blocks, etc)."),
-    '#default_value' => $pid ? $pager->reverse_list : NULL
+    '#default_value' => $pid ? $pager->reverse_list : NULL,
   );
 
   $form['buttons']['submit'] = array(
@@ -201,14 +216,18 @@ function custom_pagers_form(&$form_state, $pid = NULL) {
   return $form;
 }
 
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function custom_pagers_form_submit(&$form, &$form_state) {
   if ($form_state['values']['op'] == t('Delete')) {
     _custom_pagers_delete_pager($form_state['values']['pid']);
   }
   else {
-    $pager = (object)$form_state['values'];
+    $pager = (object) $form_state['values'];
     $pager->node_type = implode(',', $pager->node_type);
     _custom_pagers_save_pager($pager);
   }
-  $form_state['redirect'] = 'admin/build/custom_pagers';
+  $form_state['redirect'] = 'admin/structure/custom_pagers';
 }

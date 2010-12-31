@@ -7,12 +7,17 @@
  */
 
 /**
- * Implementation of hook_install().
+ * Implements hook_install().
  */
 function custom_pagers_install() {
-  drupal_install_schema('custom_pagers');
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_install_schema('custom_pagers')
 }
 
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function custom_pagers_schema() {
   $schema['custom_pager'] = array(
     'description' => 'Stores data for previous/next pagers to be added to nodes.',
@@ -84,6 +89,74 @@ function custom_pagers_schema() {
 }
 
 
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function custom_pagers_update_1() {
+  $ret = array();
+  db_add_field('custom_pager', 'list_php', array(
+    'type' => 'text',
+    'not null' => FALSE,
+    'size' => 'big',
+    'description' => 'Raw PHP to populate this {custom_pager}.',
+  ));
+  db_add_field('custom_pager', 'visibility_php', array(
+    'type' => 'text',
+    'not null' => FALSE,
+    'size' => 'big',
+    'description' => 'Raw PHP to determine when the {custom_pager} should be displayed.',
+  ));
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+}
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function custom_pagers_update_2() {
+  $ret = array();
+  db_add_field('custom_pager', 'cache_list', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'size' => 'tiny',
+    'description' => "A boolean flag indicating that this {custom_pager}'s list of nodes should be cached.",
+  ));
+  db_add_field('custom_pager', 'reverse_list', array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default' => 0,
+    'size' => 'tiny',
+    'description' => 'A boolean flag indicating that this {custom_pager} should be displayed in reverse order.',
+  ));
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+}
+
+
+/**
+ * Kill the cache flag as it's not actually that helpful.
+ */
+function custom_pagers_update_6104() {
+  $ret = array();
+  db_drop_field('custom_pager', 'cache_list');
+  // hook_update_N() no longer returns a $ret array. Instead, return
+  // nothing or a translated string indicating the update ran successfully.
+  // See http://drupal.org/node/224333#update_sql.
+  return t('TODO Add a descriptive string here to show in the UI.') /* $ret */;
+}
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
 function custom_pagers_uninstall() {
-  drupal_uninstall_schema('custom_pagers');
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_uninstall_schema('custom_pagers')
 }

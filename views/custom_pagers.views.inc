@@ -8,7 +8,7 @@
 
 
 /**
- * Implementation of hook_views_plugins.
+ * Implements hook_views_plugins().
  *
  * Defines some plugins used by the Views modes for
  * nodereference and userreference.

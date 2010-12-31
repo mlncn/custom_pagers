@@ -84,7 +84,7 @@ function custom_pagers_theme() {
 function custom_pagers_node_view($node, $view_mode = 'full') {
   // We want to make sure we don't try to output when print.module is active.
   // It's a bit of special casing but it doesn't do much harm.
-  if ($teaser == FALSE && empty($node->printing)) {
+  if (node_is_page($node) && empty($node->printing)) {
     $node->custom_pagers = _custom_pagers_load_all_pagers();
     foreach ($node->custom_pagers as $pager) {
       if ($pager->position != 'block' && _custom_pagers_visibility($pager, $node)) {
@@ -115,31 +115,25 @@ function custom_pagers_node_view($node, $view_mode = 'full') {
 }
 
 /**
- * @todo Please document this function.
- * @see http://drupal.org/node/1354
- */
-function custom_pagers_nodeapi_OLD(&$node, $op, $teaser, $page) { }
-
-/**
  * Implements hook_block_info().
  */
 function custom_pagers_block_info() {
-  if (TRUE) {
-    $pagers = _custom_pagers_load_all_pagers();
-    foreach ($pagers as $pager) {
-      if ($pager->position == 'block') {
-        $blocks[$pager->pid]['info'] = $pager->title;
-      }
+  $pagers = _custom_pagers_load_all_pagers();
+  foreach ($pagers as $pager) {
+    if ($pager->position == 'block') {
+      $blocks[$pager->pid]['info'] = $pager->title;
     }
-    return $blocks;
   }
+  return $blocks;
 }
 
 /**
  * Implements hook_block_view().
+ *
+ * Generates a block with a pager for the current node.
  */
 function custom_pagers_block_view($delta) {
-  if (TRUE && arg(0) == 'node' && $node = menu_get_object()) {
+  if (arg(0) == 'node' && $node = menu_get_object()) {
     $pagers = _custom_pagers_load_all_pagers();
     if ($pager = $pagers[$delta]) {
       if ($pager->position == 'block' && _custom_pagers_visibility($pager, $node)) {
@@ -158,13 +152,6 @@ function custom_pagers_block_view($delta) {
     }
   }
 }
-
-/**
- * Implements hook_block().
- *
- * Generates a block with a pager for the current node.
- */
-function custom_pagers_block_OLD($op = 'list', $delta = 0) { }
 
 function _custom_pagers_load_pager($pid) {
   $sql = 'SELECT * FROM {custom_pager} WHERE pid = %d';
@@ -330,11 +317,11 @@ function template_preprocess_custom_pager(&$vars) {
   $vars['key'] = t('@count of @count_total', array('@count' => ($nav['current_index'] + 1), '@count_total' => count($nav['full_list'])));
   $vars['next'] =  !empty($nav['next']) ? l(t('next') . ' ›', 'node/' . $nav['next']) : '';
 
-  $vars['template_files'][] = "custom-pager-{$vars['position']}";
-  $vars['template_files'][] = "custom-pager-$node->type";
-  $vars['template_files'][] = "custom-pager-$node->type-{$vars['position']}";
-  $vars['template_files'][] = "custom-pager-$pager->pid";
-  $vars['template_files'][] = "custom-pager-$pager->pid-{$vars['position']}";
+  $vars['theme_hook_suggestions'][] = "custom-pager-{$vars['position']}";
+  $vars['theme_hook_suggestions'][] = "custom-pager-$node->type";
+  $vars['theme_hook_suggestions'][] = "custom-pager-$node->type-{$vars['position']}";
+  $vars['theme_hook_suggestions'][] = "custom-pager-$pager->pid";
+  $vars['theme_hook_suggestions'][] = "custom-pager-$pager->pid-{$vars['position']}";
 }
 
 /**

@@ -1,13 +1,12 @@
-; $Id: custom_pagers.info,v 1.5 2008/06/17 20:47:05 eaton Exp $
+; $Id:$
 name = Custom Pagers
 core = 7.x
 description = Allows administrators to define custom pagers for navigation in lists of nodes.
 
 ; Information added by drupal.org packaging script on 2010-01-17
-version = "6.x-1.0-beta2"
+version = "7.x-1.0-dev"
 core = 7.x
 project = "custom_pagers"
-datestamp = "1263770103"
 
 
 files[] = custom-pager.tpl.php
